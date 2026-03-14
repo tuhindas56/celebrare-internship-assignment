@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  --color-foreground: black;
+  --color-background: white;
   --color-border: oklch(0.922 0 0);
-}
-
-body {
-  font-family: "Instrument Sans", sans-serif;
+  --color-primary: var(--color-blue-500);
+  --color-placeholder: var(--color-zinc-200);
+  --font-instrument-sans: "Instrument Sans", sans-serif;
 }
