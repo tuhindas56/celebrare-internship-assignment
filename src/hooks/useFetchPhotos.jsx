@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 function useFetchPhotos() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [photos, setPhotos] = useState([])
 
@@ -9,6 +9,8 @@ function useFetchPhotos() {
     const aborter = new AbortController()
 
     async function fetchPhotos() {
+      setLoading(true)
+
       try {
         const response = await fetch(
           "https://picsum.photos/v2/list/?limit=30",
@@ -22,7 +24,8 @@ function useFetchPhotos() {
         }
 
         const data = await response.json()
-        setPhotos(data)
+
+        setPhotos(Array.isArray(data) ? data : [])
       } catch (error) {
         if (!aborter.signal.aborted) {
           setError(
@@ -31,7 +34,9 @@ function useFetchPhotos() {
           console.error(error)
         }
       } finally {
-        setLoading(false)
+        if (!aborter.signal.aborted) {
+          setLoading(false)
+        }
       }
     }
 
