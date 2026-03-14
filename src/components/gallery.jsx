@@ -73,8 +73,6 @@ function Gallery() {
     return <ErrorMessage message={error} />
   }
 
-  console.log(loading)
-
   return (
     <>
       <Search value={search} onChange={setSearch} disabled={loading} />
